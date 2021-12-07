@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title th:text="${titulo}"></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="shortcut icon" href="/img/logo-256.png" type="image/png">
+</head>
+
+<body>
+    <nav th:replace="/fragmentos/nav :: nav"></nav>
+
+    <main>
+        <section>
+            <h2 th:text="${titulo}"></h2>
+
+            <form th:action="${action}" method="POST" th:object="${usuario}">
+                <input type="hidden" name="id" th:value="*{id}" placeholder="Id" />
+
+                <label for="username">Usuario</label>
+                <input type="text" name="username" th:value="*{username}" placeholder="Usuario" />
+
+                <label for="mail">Correo electrónico</label>
+                <input type="email" name="mail" th:value="*{mail}" placeholder="pepito@example.com" />
+
+                <label th:if="${password}" for="password">Contraseña</label>
+                <input th:if="${password}" type="password" name="password" placeholder="Contraseña" />
+
+                <label th:if="${password}" for="confirmPassword">Confirmar contraseña</label>
+                <input th:if="${password}" type="password" name="confirmPassword" placeholder="Confirmar contraseña" />
+
+                <label for="rol">Rango</label>
+                <select name="rol">
+                    <option th:each="item : ${roles}" th:value="${item}" th:text="${item}"
+                        th:selected="*{rol} == ${item}">
+                    </option>
+                </select>
+
+                <p th:if="${error != null}" th:text="${error}" class="message error"></p>
+
+                <input th:value="${titulo}" type="submit" class="btn primary">
+                <a href="/admin/usuarios" class="cancel">Cancelar</a>
+            </form>
+        </section>
+    </main>
+
+    <footer th:replace="/fragmentos/footer :: footer"></footer>
+</body>
+
+</html>

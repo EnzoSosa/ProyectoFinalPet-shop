@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>Magic and Strange Pet Shop!</title>
+    <link rel="shortcut icon" href="/img/logo-256.png" type="image/png">
+</head>
+
+<body>
+    <nav th:replace="/fragmentos/nav :: nav"></nav>
+
+    <main class="bg-agua">
+        <section class="container forms">
+            <form action="/profile/edit" method="POST" th:object="${usuario}" enctype="multipart/form-data">
+                <h2>Modificar perfil de usuario</h2>
+
+                <input type="hidden" th:value="*{id}" name="id" placeholder="id">
+
+                <label for="nombre">Nombre</label>
+                <input type="text" th:value="*{nombre}" name="nombre" placeholder="Pedro">
+
+                <label for="apellido">Apellido</label>
+                <input type="text" th:value="*{apellido}" name="apellido" placeholder="Suárez">
+
+                <label for="dni">DNI</label>
+                <input type="number" th:value="*{dni}" name="dni" placeholder="25555555">
+
+                <label for="fechaDeNacimiento">Fecha de nacimiento</label>
+                <input type="date" th:value="*{fechaDeNacimiento}" name="fechaDeNacimiento" placeholder="12/12/1990">
+
+                <label for="archivo">Foto de perfil</label>
+                <input type="file" name="archivo">
+
+                <input type="submit" class="btn primary" value="Guardar cambios">
+                <a href="/profile" class="cancel">Cancelar</a>
+            </form>
+            <p th:if="${error != null}" th:text="${error}" class="error message"></p>
+            <p th:if="${success != null}" th:text="${success}" class="success message"></p>
+        </section>
+    </main>
+
+    <footer th:replace="/fragmentos/footer :: footer"></footer>
+</body>
+
+</html>

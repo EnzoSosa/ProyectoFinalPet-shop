@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>Lista de productos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="shortcut icon" href="/img/logo-256.png" type="image/png">
+</head>
+
+<body>
+    <nav th:replace="/fragmentos/nav :: nav"></nav>
+
+    <main class="bg-amarillo">
+        <section class="container">
+            <h2>Usuarios</h2>
+
+            <a href="/admin/usuarios/add" class="btn primary right">Agregar usuario</a>
+
+            <p th:if="${usuarios.isEmpty}" class="message error">La lista de usuarios está vacía</p>
+
+            <p th:if="${error != null}" th:text="${error}" class="message error">Hubo un error</p>
+            <p th:if="${success != null}" th:text="${success}" class="message success">El proceso se realizó con éxito
+            </p>
+
+            <table th:if="${!usuarios.isEmpty}">
+                <thead>
+                    <tr>
+                        <th>Orden</th>
+                        <th>Usuario</th>
+                        <th>Correo</th>
+                        <th>Rango</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="usuario, iterator : ${usuarios}">
+                        <td th:text="${iterator.index + 1}">01</td>
+                        <td th:text="${usuario.username}">PLACEHOLDER</td>
+                        <td th:text="${usuario.mail}">PLACEHOLDER</td>
+                        <td th:text="${usuario.rol}">PLACEHOLDER</td>
+                        <td>
+                            <a title="Editar" class="actions green"
+                                th:href="@{'/admin/usuarios/edit/' + ${usuario.id}}"><i
+                                    class="bi bi-pencil-fill"></i></a>
+
+                            <a title="Cambiar contraseña" class="actions green"
+                                th:href="@{'/admin/usuarios/password/' + ${usuario.id}}"><i
+                                    class="bi bi-key-fill"></i></a>
+
+                            <a title="Cambiar rol" class="actions green"
+                                th:href="@{'/admin/usuarios/rol/' + ${usuario.id}}"><i
+                                    th:attr="class=${usuario.rol.name() == 'ADMIN' ? 'bi bi-bookmark-star-fill' : 'bi bi-bookmark'}"></i></a>
+
+                            <a title="Habilitar/Deshabilitar" class="actions red"
+                                th:href="@{'/admin/usuarios/activar/' + ${usuario.id}}"><i
+                                    th:attr="class=${usuario.esActivo == true ? 'bi bi-toggle2-on' : 'bi bi-toggle2-off'}"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer th:replace="/fragmentos/footer :: footer"></footer>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>Magic and Strange Pet Shop!</title>
+    <link rel="shortcut icon" href="/img/logo-256.png" type="image/png">
+</head>
+
+<body>
+    <nav th:replace="/fragmentos/nav :: nav"></nav>
+
+    <main class="bg-agua contenedor-producto" th:object="${producto}">
+
+        <div>
+            <img id="imagen-producto" th:if="*{imagen != null}" th:src="'/imagen/producto/'+*{id}">
+        </div>
+
+        <div class="vista-producto p1">
+            <h3 th:text="*{nombre}"></h3>
+
+            <p class="descripcion-producto" th:text="*{descripcionCompleta}"></p>
+            <span class="precio" th:text="*{'$'+precioUnitario+'0'}"></span>
+        </div>
+    </main>
+
+    <footer th:replace="/fragmentos/footer :: footer"></footer>
+</body>
+
+</html>

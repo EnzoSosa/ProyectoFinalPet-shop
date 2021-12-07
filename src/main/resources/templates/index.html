@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>Magic and Strange Pet Shop!</title>
+    <link rel="shortcut icon" href="/img/logo-256.png" type="image/png">
+</head>
+
+<body>
+    <nav th:replace="/fragmentos/nav :: nav"></nav>
+
+    <main class="bg-amarillo">
+        <section class="container">
+            <h1>Magic and Strange Pet Shop!</h1>
+            <div class="left">
+                <img src="/img/emojis/emoji_u1f9d9_200d_2640.png" alt="Alta maga">
+            </div>
+            <div class="right">
+                <p class="medium">Nos dedicamos a la investigación y desarrollo<br>de productos para <strong>personas no
+                        humanas 🐱🐶🧙‍♂️</strong></p>
+                <a class="btn primary" href="/productos" style="float: right;">Ver catálogo</a>
+            </div>
+        </section>
+    </main>
+
+    <section class="center pb3">
+        <h2 class="pt2">Experiencias únicas para tus mascotas</h2>
+
+        <p class="pb3">Una gran variedad de productos, innovadores y hasta extraños. una mágica experiencia.
+        </p>
+
+        <div class="tarjetas">
+            <div class="item">
+                <div class="tarjeta bg-amarillo"><img src="/img/emojis/emoji_u1f31f.png" alt="novedoso"> </div>
+                <div class="title">Novedad</div>
+            </div>
+
+            <div class="item">
+                <div class="tarjeta bg-agua"><img src="/img/emojis/emoji_u1f52e.png" alt="bola de cristal"> </div>
+                <div class="title">Magia</div>
+            </div>
+
+            <div class="item">
+                <div class="tarjeta bg-violeta"><img src="/img/emojis/emoji_u1f9ea.png" alt="tubo de ensayo"></div>
+                <div class="title">Ciencia</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-agua">
+        <div class="repadding">
+            <h2 class="center">Quiénes somos</h2>
+
+            <div class="center quienes-somos">
+                <img src="/img/emojis/emoji_u1f9dd_200d_2642.png" alt="elfo">
+                <img src="/img/emojis/emoji_u1f469_1f3fb_200d_1f52c.png" alt="científica">
+            </div>
+
+            <p class="center">Somos un equipo con el principal interés en acercarte las nuevas innovaciones y soluciones
+                científicas a través de productos de uso cotidiano.</p>
+
+            <p class="center">Nos concentramos en el estudio en laboratorios
+                específicos con el <strong>más alto nivel</strong>.</p>
+
+            <p class="center">Nos preocupamos por <strong>acercar, distribuir, educar, y de generar nuevas
+                    vanguardias</strong> a nivel de consumo y con los mayores rendimientos.</p>
+        </div>
+    </section>
+
+    <section class="contacto">
+        <div class="texto-contacto">
+            <div>
+                <img src="/img/emojis/emoji_u1f4ef.png" alt="corneta">
+            </div>
+            <div class="p2">
+                <h2>Contacto</h2>
+                <span class="center">Escríbenos un mensaje y cuéntanos de tu mascota</span>
+            </div>
+        </div>
+        <form action="/mensaje" method="POST" class="reppading">
+            <label for="mail">Correo</label>
+            <input type="email" name="mail" placeholder="firulais@catdog.com">
+
+            <label for="mensaje">Mensaje</label>
+            <textarea name="mensaje" cols="30" rows="10"></textarea>
+
+            <input class="btn primary" type="submit">
+        </form>
+        <p th:if="${error != null}" th:text="${error}" class="message error"></p>
+        <p th:if="${success != null}" th:text="${success}" class="message success"></p>
+    </section>
+
+    <footer th:replace="/fragmentos/footer :: footer"></footer>
+</body>
+
+</html>

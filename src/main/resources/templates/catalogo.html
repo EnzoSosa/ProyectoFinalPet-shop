@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>Magic and Strange Pet Shop!</title>
+    <link rel="shortcut icon" href="/img/logo-256.png" type="image/png">
+</head>
+
+<body>
+    <nav th:replace="/fragmentos/nav :: nav"></nav>
+
+    <main class="center bg-amarillo">
+        <h1>Magic and Strange Pet Shop!</h1>
+        <h2>Catálogo de productos</h2>
+        <p>Ofrecemos una amplia variedad de productos para <strong>personas no humanas</strong></p>
+    </main>
+
+    <section class="productos">
+
+        <h2>Productos</h2>
+
+        <p th:if="${productos.isEmpty}" class="message error">La lista de productos está vacía</p>
+
+        <p th:if="${error != null}" th:text="${error}" class="message error"></p>
+        <p th:if="${success != null}" th:text="${success}" class="message success"></p>
+
+        <article th:each="producto : ${productos}" class="producto">
+            <a th:href="'/productos/'+${producto.id}">
+                <img th:src="'/imagen/producto/'+${producto.id}">
+                <h3 th:text="${producto.nombre}"></h3>
+                <p th:text="${producto.descripcion}"></p>
+                <div th:text="${producto.precioUnitario}" class="precio">$123.00</div>
+            </a>
+        </article>
+
+    </section>
+
+    <footer th:replace="/fragmentos/footer :: footer"></footer>
+</body>
+
+</html>

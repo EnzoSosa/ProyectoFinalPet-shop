@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>Lista de productos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="shortcut icon" href="/img/logo-256.png" type="image/png">
+</head>
+
+<body>
+    <nav th:replace="/fragmentos/nav :: nav"></nav>
+
+    <main class="bg-amarillo">
+        <section class="container">
+            <h2>Productos</h2>
+
+            <a href="/admin/productos/add" class="btn primary right">Agregar producto</a>
+
+            <p th:if="${productos.isEmpty}" class="message error">La lista de productos está vacía</p>
+
+            <p th:if="${error != null}" th:text="${error}" class="message error">Hubo un error</p>
+            <p th:if="${success != null}" th:text="${success}" class="message success">El proceso se realizó con éxito
+            </p>
+
+            <table th:if="${!productos.isEmpty}">
+                <thead>
+                    <tr>
+                        <th>Orden</th>
+                        <th>Código</th>
+                        <th>Producto</th>
+                        <th>Descripción</th>
+                        <th>Stock</th>
+                        <th>Precio</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="producto, iterator : ${productos}">
+                        <td th:text="${iterator.index + 1}">01</td>
+                        <td th:text="${'#'+producto.codigo}">01</td>
+                        <td th:text="${producto.nombre}"></td>
+                        <td th:utext="${producto.descripcion}">
+                        </td>
+                        <td th:text="${producto.stock}"></td>
+                        <td th:text="${producto.precioUnitario}"></td>
+                        <td>
+                            <a alt="Editar" class="actions green"
+                                th:href="@{'/admin/productos/edit/' + ${producto.id}}"><i
+                                    class="bi bi-pencil-fill"></i></a>
+                            <a alt="Eliminar" class="actions red"
+                                th:href="@{'/admin/productos/delete/' + ${producto.id}}"><i
+                                    class="bi bi-trash-fill"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer th:replace="/fragmentos/footer :: footer"></footer>
+</body>
+
+</html>

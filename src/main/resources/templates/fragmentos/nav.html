@@ -1,0 +1,13 @@
+<nav th:fragment="nav">
+    <li><a href="/"><img src="/img/logo-256.png" style="width: 3rem;"></a></li>
+    <li><a href="/">Magic Pet-Shop</a></li>
+    <li><a href="/productos">Catálogo</a></li>
+    <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/admin">Panel de Admin</a></li>
+    <div class="nav-right">
+        <li sec:authorize="isAuthenticated()"><i class="bi bi-person-fill"> </i><a sec:authentication="name"
+                href="/profile">
+                Username</a></i></li>
+        <li sec:authorize="!isAuthenticated()"><a href="/login" class="btn secondary">Ingresar</a></li>
+        <li sec:authorize="isAuthenticated()"><a href="/logout" class="btn secondary">Salir</a></li>
+    </div>
+</nav>
